@@ -1,3 +1,4 @@
+import { UPDATE_POSTS } from "./actionTypes";
 export function fetchPosts() {
   return function (dispatch) {
     const url = "http://localhost:8000/api/v1/posts/";
@@ -5,13 +6,16 @@ export function fetchPosts() {
       .then((response) => {
         return response.json();
       })
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data.posts);
+        return dispatch(updatePosts(data.posts));
+      });
   };
 }
 
 export function updatePosts(posts) {
   return {
-    type: "update posts",
+    type: UPDATE_POSTS,
     posts,
   };
 }
