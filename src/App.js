@@ -1,9 +1,11 @@
 import React from "react";
 import { fetchPosts } from "./actions/posts";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import Home from "./components/Home";
 import propTypes from "prop-types";
-import PostsList from "./components/postList";
 import Navbar from "./components/navbar";
+import Page404 from "./components/Page404";
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
@@ -11,10 +13,21 @@ class App extends React.Component {
   render() {
     const { posts } = this.props;
     return (
-      <div>
-        <Navbar />
-        <PostsList posts={posts} />
-      </div>
+      <Router>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => {
+                return <Home {...props} posts={posts} />;
+              }}
+            />
+            <Route component={Page404} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
