@@ -1,4 +1,3 @@
-import { compose } from "redux";
 import { ApiUrls } from "../helper/urls";
 import { getFormBody } from "../helper/utils";
 import { LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS } from "./actionTypes";
@@ -34,6 +33,7 @@ export function createSession(email, password) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          localStorage.setItem("token", data.data.token);
           return dispatch(loginSucess(data.data.user));
         }
         dispatch(loginError(data.message));

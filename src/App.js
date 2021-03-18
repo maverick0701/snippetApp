@@ -1,13 +1,19 @@
 import React from "react";
 import { fetchPosts } from "./actions/posts";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 import { Navbar, Page404, Home, Login, Register } from "./components/index";
+import jwt_decode from "jwt-decode";
 
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
+    const token = localStorage.token;
+    let user;
+    if (token) {
+      user = jwt_decode(token);
+    }
   }
   render() {
     const { posts } = this.props;

@@ -1,5 +1,5 @@
 import { ApiUrls } from "../helper/urls";
-import { getFormBody, getFormSent } from "../helper/utils";
+import { getFormSent } from "../helper/utils";
 import { SIGN_UP_FAILED, SIGN_UP_START, SIGN_UP_SUCESS } from "./actionTypes";
 
 export function startLogin() {

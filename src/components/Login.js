@@ -1,4 +1,4 @@
-import React, { Component, createContext } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createSession } from "../actions/auth";
 class Login extends Component {

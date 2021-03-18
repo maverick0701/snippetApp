@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 class navbar extends Component {
   render() {
+    const { isLoggedIn, user } = this.props.auth;
     return (
       <div>
         <nav className="nav">
@@ -47,13 +49,21 @@ class navbar extends Component {
                 alt="user-dp"
                 id="user-dp"
               />
-              <span>John Doe</span>
+              {isLoggedIn && user.name}
             </div>
             <div className="nav-links">
               <ul>
-                <li>Log in</li>
-                <li>Log out</li>
-                <li>Register</li>
+                {!isLoggedIn && (
+                  <Link to="/signIn">
+                    <li id="links">Log in</li>
+                  </Link>
+                )}
+                {!isLoggedIn && (
+                  <Link to="/signUp">
+                    <li id="links">Register</li>
+                  </Link>
+                )}
+                {isLoggedIn && <li>Log out</li>}
               </ul>
             </div>
           </div>
@@ -63,4 +73,11 @@ class navbar extends Component {
   }
 }
 
-export default navbar;
+function matchStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+
+const connectedNavbarComponent = connect(matchStateToProps)(navbar);
+export default connectedNavbarComponent;
