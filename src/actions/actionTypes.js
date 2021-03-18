@@ -9,3 +9,7 @@ export const LOGIN_FAILED = "LOGIN_FAILED";
 export const SIGN_UP_START = "SIGN_UP_START";
 export const SIGN_UP_SUCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILED = "SIGN_UP_FAILED";
+
+//authenticate User
+export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
+export const LOGOUT_USER = "LOGOUT_USER";

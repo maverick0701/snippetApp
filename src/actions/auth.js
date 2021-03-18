@@ -1,6 +1,12 @@
 import { ApiUrls } from "../helper/urls";
 import { getFormBody } from "../helper/utils";
-import { LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS } from "./actionTypes";
+import {
+  AUTHENTICATE_USER,
+  LOGIN_FAILED,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGOUT_USER,
+} from "./actionTypes";
 
 export function loginStart() {
   return {
@@ -38,5 +44,18 @@ export function createSession(email, password) {
         }
         dispatch(loginError(data.message));
       });
+  };
+}
+
+export function authUser(user) {
+  return {
+    type: AUTHENTICATE_USER,
+    user,
+  };
+}
+
+export function logout() {
+  return {
+    type: LOGOUT_USER,
   };
 }

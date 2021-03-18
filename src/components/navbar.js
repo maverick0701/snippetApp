@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../actions/auth";
 class navbar extends Component {
+  logout = (e) => {
+    e.preventDefault();
+    this.props.dispatch(logout());
+  };
   render() {
     const { isLoggedIn, user } = this.props.auth;
     return (
@@ -63,7 +68,7 @@ class navbar extends Component {
                     <li id="links">Register</li>
                   </Link>
                 )}
-                {isLoggedIn && <li>Log out</li>}
+                {isLoggedIn && <li onClick={this.logout}>Log out</li>}
               </ul>
             </div>
           </div>

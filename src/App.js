@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import propTypes from "prop-types";
 import { Navbar, Page404, Home, Login, Register } from "./components/index";
 import jwt_decode from "jwt-decode";
+import { authUser } from "./actions/auth";
 
 class App extends React.Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class App extends React.Component {
     let user;
     if (token) {
       user = jwt_decode(token);
+      this.props.dispatch(authUser({ email: user.email, name: user.name }));
     }
   }
   render() {
