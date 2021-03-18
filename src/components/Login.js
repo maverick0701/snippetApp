@@ -1,5 +1,6 @@
 import React, { Component, createContext } from "react";
-
+import { connect } from "react-redux";
+import { createSession } from "../actions/auth";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,10 +23,11 @@ class Login extends Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.dispatch(createSession(this.state.email, this.state.password));
   };
 
   render() {
+    const { inProgress } = this.props.auth;
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
@@ -48,11 +50,25 @@ class Login extends Component {
           />
         </div>
         <div className="field">
-          <button onClick={this.handleFormSubmit}>Log In</button>
+          {inProgress ? (
+            <button onClick={this.handleFormSubmit} disabled={inProgress}>
+              Logging in...
+            </button>
+          ) : (
+            <button onClick={this.handleFormSubmit} disabled={inProgress}>
+              Log In
+            </button>
+          )}
         </div>
       </form>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
 
-export default Login;
+const connectedLoginComponent = connect(mapStateToProps)(Login);
+export default connectedLoginComponent;

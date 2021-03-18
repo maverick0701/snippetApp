@@ -10,7 +10,7 @@ const initialAuthState = {
   error: null,
 };
 export default function auth(state = initialAuthState, action) {
-  switch (action.types) {
+  switch (action.type) {
     case LOGIN_START:
       return {
         ...state,
