@@ -6,11 +6,10 @@ import {
 
 let initialRegState = {
   inProgress: false,
-  error: null,
+  message: null,
 };
 
-export default reg((state = initialRegState), action);
-{
+export default function reg(state = initialRegState, action) {
   switch (action.type) {
     case SIGN_UP_START:
       return {
@@ -21,13 +20,13 @@ export default reg((state = initialRegState), action);
       return {
         ...state,
         inProgress: false,
-        error: action.error,
+        message: action.message,
       };
     case SIGN_UP_SUCESS:
       return {
         ...state,
         inProgress: false,
-        error: null,
+        message: "successfully registered",
       };
     default:
       return state;

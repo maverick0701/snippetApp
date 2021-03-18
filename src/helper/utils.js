@@ -7,3 +7,13 @@ export function getFormBody(params) {
   }
   return form.join("&");
 }
+
+export function getFormSent(params) {
+  return {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: getFormBody(params),
+  };
+}

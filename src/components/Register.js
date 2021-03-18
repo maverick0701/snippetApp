@@ -1,6 +1,7 @@
 import React, { Component, createContext } from "react";
 import { connect } from "react-redux";
-import { createSession } from "../actions/auth";
+import userCreation from "../actions/reg";
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -28,15 +29,16 @@ class Register extends Component {
       confirm_password: e.target.value,
     });
   };
-  handlNameChange = (e) => {
+  handleNameChange = (e) => {
     this.setState({
       name: e.target.value,
     });
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
+
     this.props.dispatch(
-      createSession(
+      userCreation(
         this.state.email,
         this.state.password,
         this.state.confirm_password,
@@ -46,10 +48,13 @@ class Register extends Component {
   };
 
   render() {
-    const { inProgress } = this.props.auth;
+    const { inProgress, message } = this.props.reg;
     return (
       <form className="login-form">
-        <span className="login-signup-header">Sign Up</span>
+        <span className="login-signup-header">
+          Sign Up
+          {message && <div className="alert error-dailog">{message}</div>}
+        </span>
         <div className="field">
           <input
             type="email"
@@ -89,11 +94,11 @@ class Register extends Component {
         <div className="field">
           {inProgress ? (
             <button onClick={this.handleFormSubmit} disabled={inProgress}>
-              Logging in...
+              Signing up...
             </button>
           ) : (
             <button onClick={this.handleFormSubmit} disabled={inProgress}>
-              Log In
+              Sign Up
             </button>
           )}
         </div>
@@ -103,7 +108,7 @@ class Register extends Component {
 }
 function mapStateToProps(state) {
   return {
-    auth: state.auth,
+    reg: state.reg,
   };
 }
 
