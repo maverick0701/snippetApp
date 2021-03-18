@@ -5,6 +5,7 @@ import { logout } from "../actions/auth";
 class navbar extends Component {
   logout = (e) => {
     e.preventDefault();
+    localStorage.clear("token");
     this.props.dispatch(logout());
   };
   render() {
