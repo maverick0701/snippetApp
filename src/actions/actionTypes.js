@@ -13,3 +13,6 @@ export const SIGN_UP_FAILED = "SIGN_UP_FAILED";
 //authenticate User
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+
+//destroy messages
+export const DESTROY_MESSAGES = "DESTROY_MESSAGES";

@@ -1,5 +1,6 @@
 import {
   AUTHENTICATE_USER,
+  DESTROY_MESSAGES,
   LOGIN_FAILED,
   LOGIN_START,
   LOGIN_SUCCESS,
@@ -43,6 +44,11 @@ export default function auth(state = initialAuthState, action) {
         ...state,
         isLoggedIn: false,
         user: {},
+      };
+    case DESTROY_MESSAGES:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;

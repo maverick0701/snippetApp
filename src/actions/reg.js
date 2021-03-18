@@ -20,7 +20,7 @@ export function failReg(message) {
     message: message,
   };
 }
-export default function userCreation(email, password, confirm_password, Name) {
+export function userCreation(email, password, confirm_password, Name) {
   return function (dispatch) {
     dispatch(startLogin());
     let url = ApiUrls.register();

@@ -23,14 +23,21 @@ class Login extends Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch(createSession(this.state.email, this.state.password));
+    if (
+      this.state != null &&
+      this.state.email != null &&
+      this.state.password != null
+    ) {
+      this.props.dispatch(createSession(this.state.email, this.state.password));
+    }
   };
 
   render() {
-    const { inProgress } = this.props.auth;
+    const { inProgress, error } = this.props.auth;
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
+        {error && <div className="alert error-dailog">{error}</div>}
         <div className="field">
           <input
             type="email"

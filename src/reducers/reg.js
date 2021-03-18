@@ -1,4 +1,5 @@
 import {
+  DESTROY_MESSAGES,
   SIGN_UP_FAILED,
   SIGN_UP_START,
   SIGN_UP_SUCESS,
@@ -27,6 +28,11 @@ export default function reg(state = initialRegState, action) {
         ...state,
         inProgress: false,
         message: "successfully registered",
+      };
+    case DESTROY_MESSAGES:
+      return {
+        ...state,
+        message: null,
       };
     default:
       return state;

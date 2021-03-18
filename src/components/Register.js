@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import userCreation from "../actions/reg";
+import { destroyMessage } from "../actions/destroyAction";
+import { userCreation } from "../actions/reg";
 
 class Register extends Component {
   constructor(props) {
@@ -14,6 +15,10 @@ class Register extends Component {
     // this.emailInputRef = React.createRef();
     // this.passwordInputRef = React.createRef();
   }
+  componentWillUnmount() {
+    this.props.dispatch(destroyMessage());
+  }
+
   handleEmailChange = (e) => {
     this.setState({
       email: e.target.value,
@@ -36,25 +41,24 @@ class Register extends Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
-
-    this.props.dispatch(
-      userCreation(
-        this.state.email,
-        this.state.password,
-        this.state.confirm_password,
-        this.state.name
-      )
-    );
+    if (this.state != null) {
+      this.props.dispatch(
+        userCreation(
+          this.state.email,
+          this.state.password,
+          this.state.confirm_password,
+          this.state.name
+        )
+      );
+    }
   };
 
   render() {
     const { inProgress, message } = this.props.reg;
     return (
       <form className="login-form">
-        <span className="login-signup-header">
-          Sign Up
-          {message && <div className="alert error-dailog">{message}</div>}
-        </span>
+        <span className="login-signup-header">Sign Up</span>
+        {message && <div className="alert error-dailog">{message}</div>}
         <div className="field">
           <input
             type="email"
