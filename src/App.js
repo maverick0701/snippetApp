@@ -3,7 +3,7 @@ import { fetchPosts } from "./actions/posts";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
-import { Navbar, Page404, Home, Login } from "./components/index";
+import { Navbar, Page404, Home, Login, Register } from "./components/index";
 
 class App extends React.Component {
   componentDidMount() {
@@ -24,11 +24,19 @@ class App extends React.Component {
               }}
             />
             <Route
+              exact
+              path="/signUp"
+              render={(props) => {
+                return <Register />;
+              }}
+            />
+            <Route
               path="/signin"
               render={(props) => {
                 return <Login {...props} />;
               }}
             />
+
             <Route component={Page404} />
           </Switch>
         </div>
