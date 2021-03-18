@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { destroyMessage } from "../actions/destroyAction";
 import { userCreation } from "../actions/reg";
-
+import { Redirect } from "react-router-dom";
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -55,6 +55,10 @@ class Register extends Component {
 
   render() {
     const { inProgress, message } = this.props.reg;
+    const { isLoggedIn } = this.props.auth;
+    if (isLoggedIn) {
+      return <Redirect to="/" />;
+    }
     return (
       <form className="login-form">
         <span className="login-signup-header">Sign Up</span>
@@ -112,6 +116,7 @@ class Register extends Component {
 }
 function mapStateToProps(state) {
   return {
+    auth: state.auth,
     reg: state.reg,
   };
 }
