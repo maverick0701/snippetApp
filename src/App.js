@@ -8,12 +8,21 @@ import {
 } from "react-router-dom";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
-import { Navbar, Page404, Home, Login, Register } from "./components/index";
+import {
+  Navbar,
+  Page404,
+  Home,
+  Login,
+  Register,
+  Settings,
+} from "./components/index";
 import jwt_decode from "jwt-decode";
 import { authUser } from "./actions/auth";
 
 const PrivateRoute = (privateRouteProps) => {
   const { component: Component, isLoggedIn, path } = privateRouteProps;
+  console.log(path, "app");
+  console.log(isLoggedIn, "app");
   return (
     <Route
       path={path}
@@ -29,7 +38,7 @@ const PrivateRoute = (privateRouteProps) => {
 };
 
 class App extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(fetchPosts());
     const token = localStorage.token;
     let user;
@@ -45,14 +54,16 @@ class App extends React.Component {
       <Router>
         <div>
           <Navbar />
+
           <Switch>
-            {/* <Route
+            <Route
               exact
               path="/"
               render={(props) => {
-                return <Home {...props} posts={posts} />;
+                return <Home />;
               }}
-            /> */}
+            />
+
             <Route
               exact
               path="/signUp"
@@ -61,17 +72,20 @@ class App extends React.Component {
               }}
             />
             <Route
+              exact
               path="/signin"
               render={(props) => {
                 return <Login {...props} />;
               }}
             />
-            <PrivateRoute
-              isLoggedIn={isLoggedIn}
-              posts={posts}
-              path="/"
-              component={Home}
+            <Route
+              exact
+              path="/settings"
+              render={(props) => {
+                return <Settings {...props} />;
+              }}
             />
+
             <Route component={Page404} />
           </Switch>
         </div>

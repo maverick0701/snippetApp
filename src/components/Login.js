@@ -35,6 +35,7 @@ class Login extends Component {
 
   render() {
     const { inProgress, error, isLoggedIn } = this.props.auth;
+    console.log(isLoggedIn, "login");
     if (isLoggedIn) {
       return <Redirect to="/" />;
     }
