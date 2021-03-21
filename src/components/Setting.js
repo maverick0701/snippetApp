@@ -5,12 +5,17 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name: props.auth.user.name,
       password: "",
       confirmPassword: "",
       editMode: false,
     };
   }
+  handleChange = (fieldName, fieldValue) => {
+    this.setState({
+      [fieldName]: fieldValue,
+    });
+  };
   render() {
     const { user } = this.props.auth;
     const { editMode } = this.state;
@@ -37,7 +42,7 @@ class Settings extends Component {
           {editMode ? (
             <input
               type="text"
-              onChange={() => this.handleChange()}
+              onChange={(e) => this.handleChange("name", e.target.value)}
               value={this.state.name}
             />
           ) : (
@@ -51,7 +56,7 @@ class Settings extends Component {
 
             <input
               type="password"
-              onChange={() => this.handleChange()}
+              onChange={(e) => this.handleChange("password", e.target.value)}
               value={this.state.password}
             />
           </div>
@@ -63,7 +68,9 @@ class Settings extends Component {
 
             <input
               type="password"
-              onChange={() => this.handleChange()}
+              onChange={(e) =>
+                this.handleChange("confirmPassword", e.target.value)
+              }
               value={this.state.confirmPassword}
             />
           </div>
@@ -73,10 +80,22 @@ class Settings extends Component {
           {editMode ? (
             <button className="button save-btn">Save</button>
           ) : (
-            <button className="button edit-btn">Edit profile</button>
+            <button
+              className="button edit-btn"
+              onClick={(e) => this.handleChange("editMode", true)}
+            >
+              Edit profile
+            </button>
           )}
 
-          {editMode && <div className="go-back">Go back</div>}
+          {editMode && (
+            <div
+              className="go-back"
+              onClick={(e) => this.handleChange("editMode", false)}
+            >
+              Go back
+            </div>
+          )}
         </div>
       </div>
     );
