@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { updateUser } from "../actions/update";
 class Settings extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +12,11 @@ class Settings extends Component {
       editMode: false,
     };
   }
+  handleSave = (e) => {
+    e.preventDefault();
+    const { name, password, confirmPassword } = this.state;
+    this.props.dispatch(updateUser({ name, password, confirmPassword }));
+  };
   handleChange = (fieldName, fieldValue) => {
     this.setState({
       [fieldName]: fieldValue,
@@ -78,7 +84,12 @@ class Settings extends Component {
 
         <div className="btn-grp">
           {editMode ? (
-            <button className="button save-btn">Save</button>
+            <button
+              className="button save-btn"
+              onClick={(e) => this.handleSave(e)}
+            >
+              Save
+            </button>
           ) : (
             <button
               className="button edit-btn"

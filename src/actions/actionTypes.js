@@ -14,5 +14,9 @@ export const SIGN_UP_FAILED = "SIGN_UP_FAILED";
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 
+//updating User
+export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
+export const UPDATE_FAILED = "UPDATE_FAILED";
+
 //destroy messages
 export const DESTROY_MESSAGES = "DESTROY_MESSAGES";
